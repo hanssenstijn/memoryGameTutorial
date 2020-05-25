@@ -1,0 +1,84 @@
+/*
+If you set box-sizing: border-box; on an element,
+padding and border are included in the width and height
+*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*
+By setting display: flex to the body and margin: auto
+to the .memory-game container,
+it will be centered both vertically and horizontally.
+By setting flex-wrap to wrap,
+flex-items wrap along multiple lines,
+accordingly to their size.
+*/
+
+body {
+  height: 100vh;
+  display: flex;
+  background: #060AB2;
+}
+
+.memory-game {
+  width: 640px;
+  height: 640px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+/*
+Perspective property sets how far in
+the z plane the object is from the user
+*/
+
+.memory-card {
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  margin: 5px;
+  position: relative;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+}
+
+/*
+The :active pseudo class will be triggered every time
+the element gets clicked and will apply a .2s transition to its size
+*/
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+/*
+The property position: absolute set to both front-face and back-face,
+will remove the elements from the original position,
+and stack them on top of each other.
+*/
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: #1C7CCC;
+  backface-visibility: hidden;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
